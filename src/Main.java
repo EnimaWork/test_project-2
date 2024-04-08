@@ -31,8 +31,9 @@ public class Main {
 
         boolean containsChar2 = data[0].charAt(0) == str && data[0].charAt(data[0].length() - 1) == str; //проверяет наличие символа в начале и конце первого элемента массива
         boolean containsChar3 = data[1].charAt(0) == str && data[1].charAt(data[1].length() - 1) == str; // тоже самое для второго элемента массива
+        boolean containsChar4 = data[0].length() <= 12 && data[1].length() <= 12;
 
-        if (containsChar2 == false) {
+        if (containsChar2 == false || containsChar4 == false) {
             System.out.println(exception);
             System.exit(0);
         }
