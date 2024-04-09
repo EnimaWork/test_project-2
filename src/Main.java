@@ -1,10 +1,10 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner scn = new Scanner(System.in);
         String input = scn.nextLine();
-        String exception = "throws Exception";
         char operator = 0;
         char str = '"';
         String[] data = new String[0];
@@ -22,8 +22,7 @@ public class Main {
             data = input.split(" / ");
             operator = '/';
         } else {
-            System.out.println(exception); //Некорректный знак действия
-            System.exit(0);
+            throw new Exception("Нет оператора действия");
         }
 
         boolean containsChar = input.contains(String.valueOf("\"")); //метод проверки на наличие кавычек
@@ -34,19 +33,16 @@ public class Main {
         boolean containsChar4 = data[0].length() <= 12 && data[1].length() <= 12;
 
         if (containsChar2 == false || containsChar4 == false) {
-            System.out.println(exception);
-            System.exit(0);
+            throw new Exception("Строки должны быть в скобках");
         }
 
         if (operator == '+' || operator == '-') {
             if (containsChar == false || count >= 4 || containsChar3 == false) {
-                System.out.println(exception);
-                System.exit(0);
+                throw new Exception("Строки должны быть в скобках");
             }
             if (operator == '*' || operator == '/' || count >= 2) {   //Строчку можно делить или умножать только на число
                 if (data[1].contains("\"")) {
-                    System.out.println(exception);
-                    System.exit(0);
+                    throw new Exception("Делить и умножать можно только на число");
                 }
             }
         }
@@ -61,8 +57,7 @@ public class Main {
         } else if (operator == '*') {
             int dataIn = Integer.parseInt(data[1]);
             if (isNumber(data[1]) == false) {
-                System.out.println(exception);
-                System.exit(0);
+                throw new Exception("Числа должны быть от 1 до 10");
             }
             else {
                 String result = "";
@@ -82,26 +77,25 @@ public class Main {
             }
         } else {
             if (isNumber(data[1]) == false) {
-                System.out.println(exception);
-                System.exit(0);
+                throw new Exception("Числа должны быть от 1 до 10");
             }
-            int x = data[0].length() / Integer.parseInt(data[1]);
-            String result = data[0].substring(0, x);
-            printIn(result);
+                int x = data[0].length() / Integer.parseInt(data[1]);
+                String result = data[0].substring(0, x);
+                printIn(result);
         }
-
     }
 
     public static boolean isNumber(String str) {   //проверка на число от 1 до 10
-        try {
-            int num = Integer.parseInt(str);
-            if (num >= 1 && num <= 10); {
-                return true;
-            }
-        } catch (NumberFormatException e) {
+        int num = Integer.parseInt(str);
+        {
+            if (num >= 1 && num <= 10) {;
+            return true;
+        } else{
             return false;
         }
+        }
     }
+
 
     static void printIn(String text) {
         if (text.length() > 40) {
